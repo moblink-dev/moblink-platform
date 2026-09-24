@@ -75,9 +75,21 @@ migration or delete preserved data during rollback.
   and referral migrations are applied to project `xfrhwibtmpjnasbcxdlw`.
 - Fresh local database suites pass: platform 187 pgTAP tests and website 53
   pgTAP tests. Platform lint/typecheck/app tests/build pass (79 admin and 35
-  contract tests); website tests/typecheck/build pass (48 application tests).
+  contract tests); website tests/typecheck/build pass (51 application tests).
 - Supabase security advisor has no critical finding from this work. Two
   no-policy tables remain deliberately deny-by-default; moving the existing
   `citext` extension is deferred because it is unrelated and migration-risky.
-- Preview deployment, browser journeys, Docker-stopped proof, independent
-  human review, and any local cleanup remain open.
+- Protected Vercel Preview deployment
+  `moblink-website-61szd2s6r-rhycollabs-projects.vercel.app` is Ready. With
+  Docker stopped, the browser journey proved anonymous login, referral and
+  support-message persistence, private profile upload persistence, customer
+  inbox restoration, and guest rejection from `/admin`; the clean test tab
+  produced no console errors or warnings. All synthetic browser records,
+  storage objects and the anonymous test user were deleted and verified at
+  zero afterward.
+- After every Docker-stopped cloud gate passed, `docker system prune -a`
+  removed only stopped disposable test containers and replaceable images,
+  reclaiming 22.43 GB. All 15 database volumes, the 205 MB private backup,
+  and both source checkouts remain. Docker is stopped again; measured free
+  space increased from 12 GiB to 33 GiB.
+- Independent human review, merge, and any production activation remain open.
